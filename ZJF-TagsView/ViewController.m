@@ -28,8 +28,8 @@
 }
 
 #pragma mark - TagsViewDelegate
-- (void)tagsClickedWithIndex:(NSInteger)index {
-    NSLog(@"---%ld", index);
+- (void)tagsClickedWithIndex:(NSInteger)index isSelected:(BOOL)isSelected {
+    NSLog(@"---%ld selected:%d", index, isSelected);
 }
 
 - (void)switchBtnClicked:(BOOL)fullScreen {

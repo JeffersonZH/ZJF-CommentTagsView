@@ -18,6 +18,9 @@
 @property (nonatomic, assign) NSInteger lineCount;
 @property (nonatomic, assign) CGFloat lastBtnWdith;
 
+@property (nonatomic, strong) UIButton * currentBtn;//记录所选btn
+//@property (nonatomic, assign) NSInteger currentBtnIndex;//记录所选btn
+
 @property (nonatomic, assign) BOOL fullFrame;
 
 @end
@@ -32,6 +35,7 @@
         _x = 0;
         _lineCount = 0;
         _lastBtnWdith = 0;
+        _currentBtn = nil;
     }
     return self;
 }
@@ -86,8 +90,24 @@
 }
 
 - (void)tagBtnClicked:(UIButton *)btn {
-    if ([self.delegate respondsToSelector:@selector(tagsClickedWithIndex:)]) {
-        [self.delegate tagsClickedWithIndex:btn.tag];
+    BOOL selected;
+    //是同一个：取消选中
+    if (_currentBtn.tag == btn.tag) {
+        selected = NO;
+        _currentBtn = nil;
+        btn.backgroundColor = [UIColor lightGrayColor];
+    }
+    //不是同一个：选中
+    else {
+        selected = YES;
+        btn.backgroundColor = [UIColor redColor];
+        _currentBtn.backgroundColor = [UIColor lightGrayColor];
+        _currentBtn = btn;
+    }
+    
+
+    if ([self.delegate respondsToSelector:@selector(tagsClickedWithIndex:isSelected:)]) {
+        [self.delegate tagsClickedWithIndex:btn.tag isSelected:selected];
     }
 }
 

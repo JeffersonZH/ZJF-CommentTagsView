@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TagsViewDelegate <NSObject>
 //标签点击回调事件
--(void)tagsClickedWithIndex:(NSInteger)index;
+-(void)tagsClickedWithIndex:(NSInteger)index isSelected:(BOOL)isSelected;
 //切换frame大小按钮事件
 -(void)switchBtnClicked:(BOOL)fullScreen;
 @end
